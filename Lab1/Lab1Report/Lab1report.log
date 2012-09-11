@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  10 SEP 2012 22:48
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  11 SEP 2012 16:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -780,43 +780,59 @@ File: figures/TrainingSet.pdf Graphic file (type pdf)
 
 <use figures/TrainingSet.pdf>
 Package pdftex.def Info: figures/TrainingSet.pdf used on input line 73.
-(pdftex.def)             Requested size: 404.71355pt x 261.31155pt.
+(pdftex.def)             Requested size: 404.71355pt x 242.5661pt.
 
 <figures/TestSet.pdf, id=11, 614.295pt x 794.97pt>
 File: figures/TestSet.pdf Graphic file (type pdf)
  <use figures/TestSet.pdf>
 Package pdftex.def Info: figures/TestSet.pdf used on input line 80.
-(pdftex.def)             Requested size: 404.71355pt x 261.31155pt.
+(pdftex.def)             Requested size: 404.71355pt x 242.5661pt.
 
 [1
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./figur
-es/TrainingSet.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 95.
- [2 <./figures/TestSet.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 95.
- (./Lab1report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 95.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 95.
+es/TrainingSet.pdf>] <figures/KnnResults.pdf, id=32, 614.295pt x 794.97pt>
+File: figures/KnnResults.pdf Graphic file (type pdf)
+
+<use figures/KnnResults.pdf>
+Package pdftex.def Info: figures/KnnResults.pdf used on input line 93.
+(pdftex.def)             Requested size: 404.71355pt x 251.93883pt.
+ [2 <./figures/TestSet.pdf> <./figures/KnnResults.pdf>] <figures/CrossValResult
+s.pdf, id=49, 614.295pt x 794.97pt>
+File: figures/CrossValResults.pdf Graphic file (type pdf)
+
+<use figures/CrossValResults.pdf>
+Package pdftex.def Info: figures/CrossValResults.pdf used on input line 109.
+(pdftex.def)             Requested size: 404.71355pt x 251.93883pt.
+ [3 <./figures/CrossValResults.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 129.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 129.
+
+(./Lab1report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 129.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 129.
 Package rerunfilecheck Info: File `Lab1report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 95.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 129.
  ) 
 Here is how much of TeX's memory you used:
- 15219 strings out of 493488
- 282544 string characters out of 3141326
- 383503 words of memory out of 3000000
- 18244 multiletter control sequences out of 15000+200000
- 9708 words of font info for 35 fonts, out of 3000000 for 9000
+ 15238 strings out of 493488
+ 282887 string characters out of 3141326
+ 384597 words of memory out of 3000000
+ 18255 multiletter control sequences out of 15000+200000
+ 10016 words of font info for 36 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 49i,13n,55p,860b,329s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on Lab1report.pdf (2 pages, 114328 bytes).
+ 49i,13n,55p,924b,327s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+Output written on Lab1report.pdf (4 pages, 145500 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 500000)
- 35 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 90 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
+ 14 named destinations out of 1000 (max. 500000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

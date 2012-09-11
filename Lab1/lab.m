@@ -34,7 +34,7 @@ plot(A(1:length(A)*3/4,1),A(1:length(A)*3/4,2),'ks');
 plot(B(1:length(B)*3/4,1),B(1:length(B)*3/4,2),'ro');
 legend('Class A','Class B');
 hold off
-title('Training Set')
+% title('Training Set')
 
 
 %This figure depicts the two classes of the test set.
@@ -44,7 +44,7 @@ plot(A(length(A)*3/4+1:length(A),1),A(length(A)*3/4+1:length(A),2),'ks');
 plot(B(length(B)*3/4+1:length(B),1),B(length(B)*3/4+1:length(B),2),'ro');
 legend('Class A','Class B');
 hold off
-title('Test Set')
+% title('Test Set')
 
 
 %% Exercise 2
@@ -59,7 +59,7 @@ kValueMax = 30;
 ClassificationResults = zeros(kValueMax,2);
 
 %Classification with multiple values for K
-for kValue=1:kValueMax
+for kValue=1:2:kValueMax
 
 ClassificationResults(kValue,:) = KnnFunction(2, 2, kValue, TrainingSet, TestSet);
  
@@ -70,21 +70,21 @@ figure();
 bar(ClassificationResults(:,1));
 xlabel('K');
 ylabel('Accuracy rate %');
-title('Classification Accuracy');
+% title('Classification Accuracy');
 
 %Error rate for different values of K
 figure();
 bar(ClassificationResults(:,2));
 xlabel('K');
 ylabel('Error rate %');
-title('Classification Error');
+% title('Classification Error');
 
 %% Exercise 3
 %10-Fold Cross Validation
 
-% Shuffling one more time the two classes
-A = A(randperm(length(A)),:);
-B = B(randperm(length(B)),:);
+% % Shuffling one more time the two classes
+% A = A(randperm(length(A)),:);
+% B = B(randperm(length(B)),:);
 
 %Determination of each fold in k-fold cross validation process
 foldSize = 10;
@@ -99,7 +99,7 @@ kValueMax = 30;
 ClassificationResultsCross = zeros(kValueMax,2);
 
 %Classification with multiple values for K
-for kValue = 1 : kValueMax
+for kValue = 1:2:kValueMax
     
   %For each K value, we perform cross validation to derive more accurate conclusions
   ClassificationResultsCross(kValue,:) = CrossValidation(A, B, foldSize, kValue);
@@ -112,7 +112,7 @@ figure();
 bar(ClassificationResultsCross(:,2));
 xlabel('K');
 ylabel('Error rate %');
-title('Classification Error');
+% title('Classification Error');
 
 
 % Arg Min to determine the best value for k
