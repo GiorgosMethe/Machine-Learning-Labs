@@ -50,7 +50,7 @@ hold off
 %% Exercise 2
 
 %Number of tests (k=1,2,...,kValueMax)
-kValueMax = 30;
+kValueMax = 1000;
 
 %Results Array, including results for different K
 %First column - Classification Accuracy
