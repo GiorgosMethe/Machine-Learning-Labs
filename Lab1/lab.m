@@ -89,9 +89,6 @@ ylabel('Error rate %');
 %Determination of each fold in k-fold cross validation process
 foldSize = 10;
 
-%Number of tests (k=1,2,...,kValueMax)
-kValueMax = 30;
-
 %Results Array, including results for different K
 %First column - Classification Accuracy
 %Second column - Classification Error
@@ -118,7 +115,7 @@ ylabel('Error rate %');
 % Arg Min to determine the best value for k
 min =100000;
 argmin = 0;
-for kValue=1:length(ClassificationResultsCross)
+for kValue=1:2:length(ClassificationResultsCross)
     if ClassificationResultsCross(kValue,2) < min
         min = ClassificationResultsCross(kValue,2);
         argmin = kValue;
