@@ -13,5 +13,5 @@ function [Q LL] = mog_E_step(X,MOG)
    
     Q = Q ./ repmat(total, [1 K]);
    
-    LL = sum(log(total));
+    LL = sum(log(total));2
 end

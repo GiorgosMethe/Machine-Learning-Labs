@@ -20,7 +20,7 @@ if verbose
 end
 
 %---Initialisation
-mog       = init_mog(X,C);
+mog = init_mog(X,C);
 if verbose>1
   clf
   plot(X(:,1),X(:,2),'bo');              

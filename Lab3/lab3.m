@@ -2,8 +2,8 @@ clc
 clear all
 close all
 
-% load('banana.mat');
-load('spiral.mat');
+load('banana.mat');
+% load('spiral.mat');
 
 
 %Determination of the training set. This training set includes 75% of each Table A and B
@@ -24,7 +24,7 @@ title('Training Set')
 TestSet = [A(length(A)*3/4+1:length(A),:) ; B(length(B)*3/4+1:length(B),:)];
 TrainingSet = [TrainingSetA;TrainingSetB];
 
-%--------------EXCERCISE1-------------
+%% --------------EXCERCISE1-------------
 
 %Prior Probabilities
 pr_classA = size(A,1)/(size(A,1)+size(B,1));
@@ -48,17 +48,18 @@ meanB = [sumBx sumBy]/size(TrainingSetA,1);
 %covariance matrix
 covA = cov(TrainingSetA);
 covB = cov(TrainingSetB);
-
-%Probability of the dataset
-PA = mvnpdf(TestSet,meanA,covA);
-PB = mvnpdf(TestSet,meanB,covB);
+ 
+%Probability of the test dataset to 
+%belong in class A or class B
+pA = mvnpdf(TestSet,meanA,covA);
+pB = mvnpdf(TestSet,meanB,covB);
 
 
 %classification1
 classification=zeros(size(TestSet));
 for i=1:size(TestSet,1)
    
-    if PA(i)>PB(i)
+    if pA(i)>pB(i)
         classification(i,1)=1;
         classification(i,2)=0;
     else
@@ -66,7 +67,7 @@ for i=1:size(TestSet,1)
         classification(i,2)=1;
     end
 end
-
+ 
 %efficiency evaluation and error rate
 labels=[[ones(length(TestSet)*1/2,1) zeros(length(TestSet)*1/2,1)]; [zeros(length(TestSet)*1/2,1) ones(length(TestSet)*1/2,1) ]];
 [C, rate] = confmat(classification, labels);
@@ -74,26 +75,23 @@ accuracy=rate(1,2)/length(TestSet);
 error_rate=1-accuracy;
 
 
-%------------EXERCISE2-------------
+%% ------------EXERCISE2-------------
 
 %EM algorithm
-Celip=8;
+num_ellipse=3;
 figure();
-[loglA mogA] = em_mog(TrainingSetA,C,2);
+[loglA mogA] = em_mog(TrainingSetA,num_ellipse,2);
 figure();
-[loglB mogB] = em_mog(TrainingSetB,C,2);
+[loglB mogB] = em_mog(TrainingSetB,num_ellipse,2);
 
 %Posterior Probability
 sumA=0;
-for i=1:C 
-PA = mogA{i}.PI*mvnpdf(TestSet,mogA{i}.MU,mogA{i}.SIGMA);
-sumA = sumA + PA;
-end
-
 sumB=0;
-for i=1:C
-PB = mogB{i}.PI*mvnpdf(TestSet,mogB{i}.MU,mogB{i}.SIGMA);
-sumB = sumB + PB;
+for i=1:num_ellipse 
+pA = mogA{i}.PI*mvnpdf(TestSet,mogA{i}.MU,mogA{i}.SIGMA);
+pB = mogB{i}.PI*mvnpdf(TestSet,mogB{i}.MU,mogB{i}.SIGMA);
+sumB = sumB + pB;
+sumA = sumA + pA;
 end
 
 %classification2

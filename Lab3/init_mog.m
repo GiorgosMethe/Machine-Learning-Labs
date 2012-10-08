@@ -11,3 +11,4 @@ for i = 1:C
     pos= pos + step;
     MOG{i} = struct('MU', mean(temp), 'SIGMA', cov(temp), 'PI', 1/C);
 end
+end
