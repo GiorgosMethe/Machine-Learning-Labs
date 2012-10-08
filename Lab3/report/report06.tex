@@ -1,7 +1,11 @@
-\documentclass[letterpaper,11pt]{article}
+\documentclass[a4paper,11pt]{article}
+
 \usepackage{fullpage}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage[pdftex]{hyperref}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{amsmath}
@@ -10,72 +14,86 @@
 \usepackage{array}
 \usepackage{pgf}
 \usepackage{tikz}
+
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{fancyhdr}
+\usepackage{eucal}
+\usepackage{ifthen}
+\usepackage{ifpdf}
+\usepackage{lmodern}
+\usepackage{amsthm}
+\usepackage{catoptions} % For \Autoref
+
+
 \usetikzlibrary{positioning}
-\usetikzlibrary{arrows,automata}
-\usepackage{graphicx}
 
 \hypersetup{
-	colorlinks,%
-	citecolor=black,%
-	filecolor=black,%
-	linkcolor=blue,%
-	urlcolor=mygreylink     % can put red here to visualize the links
+  colorlinks,%
+    citecolor=black,%
+    filecolor=black,%
+    linkcolor=black,%
+    urlcolor=mygreylink     % can put red here to visualize the links
 }
-   
-    \definecolor{mygrey}{gray}{.85}
-    \definecolor{mygreylink}{gray}{.30}
-    \textheight=8.6in
-    \raggedbottom
-    \raggedright
-    \setlength{\tabcolsep}{0in}
-    \addtolength{\oddsidemargin}{-0.375in}
-    \addtolength{\evensidemargin}{0.375in}
-    \addtolength{\textwidth}{0.5in}
-    \addtolength{\topmargin}{-.375in}
-    \addtolength{\textheight}{0.75in}
 
-    \newcommand{\resitem}[1]{\item #1 \vspace{-2pt}}
-    \newcommand{\resheading}[1]{{\LARGE \colorbox{mygrey}{\begin{minipage}{\textwidth}{\textbf{#1 \vphantom{p\^{E}}}}\end{minipage}}}}
-    \newcommand{\ressubheading}[4]{
-    \begin{tabular*}{6.5in}{l@{\extracolsep{\fill}}r}
-		    \textbf{#1} & #2 \\
-		    \textit{#3} & \textit{#4} \\
-    \end{tabular*}\vspace{-6pt}}
-  
-    \begin{document}
+\definecolor{hlcolor}{rgb}{1, 0, 0}
+\definecolor{mygrey}{gray}{.85}
+\definecolor{mygreylink}{gray}{.30}
+\textheight=8.6in
+\raggedbottom
+\addtolength{\oddsidemargin}{-0.375in}
+\addtolength{\evensidemargin}{0.375in}
+\addtolength{\textwidth}{0.5in}
+\addtolength{\topmargin}{-.375in}
+\addtolength{\textheight}{0.75in}
+
+
+\newcommand{\resheading}[1]{{\large \colorbox{mygrey}{\begin{minipage}{\textwidth}{\textbf{#1 \vphantom{p\^{E}}}}\end{minipage}}}}
+
+\newcommand{\mywebheader}{
+  \begin{tabular}{@{}p{5in}p{4in}}
+  {\resheading{Assignment 2: Single Agent Learning}} & {\Large 5 October, 2012}\\\vspace{0.2cm}
+  \end{tabular}}
+
+\begin{document}
+
 
 \begin{center}
-{\Large \textbf{Machine Learning: Pattern Recognition}}\\ [1em]
+{\LARGE \textbf{Autonomous Agents}}\\ [1em]
 \end{center}
-\newcommand{\mywebheader}{
-    \begin{tabular}{@{}p{5.3in}p{4in}}
-		{\resheading{{\LARGE Lab 3: Expectation Maximisation}}} & { {\Large 11 October, 2012}}\\\vspace{0.3cm}
-	    \end{tabular}}
-    \mywebheader
-    
-    	\begin{center}
-    	{\Large By:} \\ \vspace{0.1cm}
-	    {\Large Paris Mavromoustakos} \\  \vspace{0.1cm}
-	    {\Large Georgios Methenitis} \\ \vspace{0.1cm}
-	    {\Large Marios Tzakris}
-	    \end{center}
+\mywebheader
 
-  
-  \section*{Exercise 1}
+\begin{center}
+{\Large By:} \\ \vspace{0.1cm}
+{\Large Paris Mavromoustakos} \\  \vspace{0.1cm}
+{\Large Georgios Methenitis} \\ \vspace{0.1cm}
+{\Large Marios Tzakris}
+\end{center}
+
+\section*{Introduction}
+there must be an introduction
+
+
+
+\section*{Exercise 1}
 
 First of all, we loaded the given data files (banana.mat) and (spiral.mat) each contained two classes of two-dimensional data points. The training set consists of 75\% of data points from class A appended to 75\% of data points from class B, while the test set contains the remaining
-25\% of both classes A and B. Just by looking data we can see that the data in both cases are spirally distributed. Thus a single $2D$ Gaussian wont be able to describe the class conditional probabilities well, so we do not expect the model to perform accurately.\\
-
-FIGURES DATA
-\\
-
-In order to do the training we need the prior probabilities, the means $\mu_k$ and covariance matrices $\Sigma_k$
+25\% of both classes A and B. Just by looking data we can see that the data in both cases are spirally distributed. Thus a single $2D$ Gaussian wont be able to describe the class conditional probabilities well, so we do not expect the model to perform accurately. In order to do the training we need the prior probabilities, the means $\mu_k$ and covariance matrices $\Sigma_k$.
 
 
 
+\newpage
 
-    
+\section*{Exercise 2}
 
-    \end{document}
+\newpage
+\section*{Exercise 3}
 
+
+\newpage
+\section*{Conclusion}
+\newpage
+
+
+\end{document}
 
