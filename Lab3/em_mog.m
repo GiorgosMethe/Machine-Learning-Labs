@@ -5,7 +5,7 @@
 %   C         : number of mixture components
 %   verbose   : verbosity (1 prints info, 2 prints and draws)
   
-function [LogL,mog] = em_mog(X,C,verbose);
+function [LogL,mog] = em_mog(X,C,verbose)
 
 epsilon       = 1e-5;
 max_iters     = 1000;
@@ -47,7 +47,7 @@ for iter=1:max_iters; % EM loops
     end
     if verbose>1
       clf
-      plot(X(:,1),X(:,2),'bo');              
+      plot(X(:,1),X(:,2),'ro');              
       hold on;
       for i=1:C
         plot_gauss(mog{i}.MU,mog{i}.SIGMA);

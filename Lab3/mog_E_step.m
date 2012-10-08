@@ -1,17 +1,20 @@
-%The E step in the EM algorithm
-
+% E-Step function in EM algorithm,
+% outputs the responsibilities
 function [Q LL] = mog_E_step(X,MOG)
-    %Number of components
-    K = length(MOG);
+
+    L = length(MOG);
     N = length(X(:,1));
-    Q = zeros(N, K);
+    Q = zeros(N, L);
     total = zeros(N, 1);
-    for k = 1:K
-        Q(:,k) = MOG{k}.PI * mvnpdf(X, MOG{k}.MU, MOG{k}.SIGMA);
-        total = total + Q(:,k);
+    for i = 1:L
+        % responsibility of the gaussian for each datapoint 
+        prob = MOG{i}.PI * mvnpdf(X, MOG{i}.MU, MOG{i}.SIGMA);
+        Q(:,i) = prob;
+        total = total + prob;
     end
    
-    Q = Q ./ repmat(total, [1 K]);
+    % evaluate responsibility of the gaussian for each datapoint 
+    Q = Q ./ repmat(total, [1 L]);
    
     LL = sum(log(total));
 end
