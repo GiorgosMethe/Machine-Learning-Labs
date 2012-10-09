@@ -24,7 +24,7 @@
 \usepackage{lmodern}
 \usepackage{amsthm}
 \usepackage{catoptions} % For \Autoref
-
+\usetikzlibrary{arrows,automata}
 
 \usetikzlibrary{positioning}
 
@@ -71,9 +71,26 @@
 \end{center}
 
 \section*{Introduction}
-there must be an introduction
+In this lab assignment we have built a probabilistic classifier for one particular purpose: to point out how the complexity of learning is modified according to the number of variables observed. To observe the difference we implemented two different models, a Bayesian classifier with normally distributed datapoints, and a Bayesian classifier with datapoints deriving from a mixture of Gaussians (MOG). The two models are represented graphically below.
+
+\begin{center}
+\begin{tikzpicture}
+\node [circle, draw=black, minimum size=0.2cm] (a){C};
+	\node [circle,draw=black ,minimum size=0.2cm] (b)[below=1.5cm of a]{x};
+
+	\draw [->,draw=black] (a) to (b);
+	
+	\node [circle,draw =black, minimum size = 0.2cm](c)[right=6cm of a]{C};
+	\node [circle,draw =red, minimum size = 0.2cm](d)[below right=0.75cm of c]{z};
+		\node [circle,draw =black, minimum size = 0.2cm](e)[below =1.5cm of c]{x};
+		\draw [->,draw=red] (c) to (d);
+		\draw [->,draw=black] (c) to (e);
+		\draw [->,draw=red] (d) to (e);
+\end{tikzpicture}
+\end{center}
 
 
+A mixture distribution is the probability distribution of a random variable whose values can be interpreted as being derived from an underlying set of random variables. In the above figure, it is shown that a \textbf{latent variable} z underlies between class C and datapoint x, thus latent variable z controls which datapoints belong to which mixture element.
 
 \section*{Exercise 1}
 
