@@ -14,7 +14,7 @@
 \usepackage{array}
 \usepackage{pgf}
 \usepackage{tikz}
-
+\usepackage{epstopdf}
 \usepackage{amssymb}
 \usepackage{graphics}
 \usepackage{fancyhdr}
@@ -77,8 +77,69 @@ there must be an introduction
 
 \section*{Exercise 1}
 
-First of all, we loaded the given data files (banana.mat) and (spiral.mat) each contained two classes of two-dimensional data points. The training set consists of 75\% of data points from class A appended to 75\% of data points from class B, while the test set contains the remaining
-25\% of both classes A and B. Just by looking data we can see that the data in both cases are spirally distributed. Thus a single $2D$ Gaussian wont be able to describe the class conditional probabilities well, so we do not expect the model to perform accurately. In order to do the training we need the prior probabilities, the means $\mu_k$ and covariance matrices $\Sigma_k$.
+First, we loaded the given data files \texttt{banana.mat}, and, \texttt{spiral.mat}, each one of them contains two-dimensional data points, represent two different classes. The training set, which we used in order to train our classifier consists of 75\% of data points from class A, appended to 75\% of data points from class B, while the test set contains the remaining 25\% of both classes A and B. Figure~\ref{fig1}, shows the 2-D representation of the two classes of data-points.
+
+\begin{figure}[h!]
+  \centering   
+      \includegraphics[width=0.49\textwidth]{figures/ABclasses.eps}\		
+      \includegraphics[width=0.49\textwidth]{figures/ABclassesSp.eps}
+      
+  \caption{Depiction of the 2-D data-points of the two given classes for the \texttt{banana.mat} (left) and \texttt{spiral.mat} (right).}
+  \label{fig1}
+\end{figure}
+
+Looking into these data-points, we can figure out that the distribution of the data in both cases is following a "banana" and a spiral shape respectively. Therefore, a single 2-D Gaussian distribution could not be able to describe the class conditional probabilities well. For this reason, we do not expect the model to perform accurately. In order to perform the training, we need the prior probabilities, the mean $\mu_k$ of each class and the covariance matrix $\Sigma_k$  for each class $k \in \{A, B\}$. We set the prior probabilities $0.5$ as the number of the data for class A and B is the equal. Next, we can directly extract the mean and and the covariance for each class directly from the training data. The pseudocode for that is given below:\\
+
+\begin{verbatim}
+[A, B] = load( data_points )
+TrainingSetA = A(1:length(A)*3/4,:)
+TrainingSetB = B(1:length(B)*3/4,:)
+TrainingSet = [TrainingSetA; TrainingSetB]
+
+prior_probability_A = size(A,1)/(size(A,1)+size(B,1))
+prior_probability_B = size(B,1)/(size(A,1)+size(B,1))
+
+for i=1:size(TrainingSetA,1)
+   sumAx = sumAx + TrainingSetA(i,1);
+   sumAy = sumAy + TrainingSetA(i,2);
+   sumBx = sumBx + TrainingSetB(i,1);
+   sumBy = sumBy + TrainingSetB(i,2);
+end
+
+mean_A = [sumAx sumAy]/size(TrainingSetA,1);
+mean_B = [sumBx sumBy]/size(TrainingSetA,1);
+
+covariance_A = cov(TrainingSetA);
+covariance_B = cov(TrainingSetB);
+
+pA = mvnpdf(TestSet,mean_A,covariance_A);
+pB = mvnpdf(TestSet,mean_B,covariance_B);
+
+PostA = (pA .* prior_probability_A) ./ (pA .* pr_classA + pB .* pr_classB);
+PostB = (pB .* prior_probability_B) ./ (pA .* pr_classA + pB .* pr_classB);
+\end{verbatim} 
+After the classification process we got the following confusion matrices and error rates for the our classifier:
+\begin{description}
+\item[Banana set]
+\begin{align*}
+Confusion\ Matrix &= 
+\begin{bmatrix}
+226 & 24 \\ 
+26 & 224
+\end{bmatrix},\\
+error\ rate &= 0.1
+\end{align*}
+\item[Spiral set]
+\begin{align*}
+Confusion\ Matrix &= 
+\begin{bmatrix}
+174 & 76 \\ 
+89 & 161
+\end{bmatrix},\\
+error\ rate &= 0.33
+\end{align*}
+\end{description}
+As we said before, the way that we tried to perform classification in this type of data, did not perform well, mainly because, the shape of the data, and the fact that, data-points from the one class are located inside the other class, make it impossible for a simple 2-D Gaussian distribution to represent them.
 
 
 
