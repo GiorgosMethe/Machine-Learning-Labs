@@ -75,11 +75,10 @@ labels=[[ones(length(TestSet)*1/2,1) zeros(length(TestSet)*1/2,1)]; [zeros(lengt
 accuracy=rate(1,2)/length(TestSet);
 error_rate=1-accuracy;
 
-
+tic
 %% ------------EXERCISE2-------------
-for ee=1:30
 %EM algorithm
-num_ellipse=ee;
+num_ellipse=3;
 figure();
 [loglA mogA] = em_mog(TrainingSetA,num_ellipse,2);
 figure();
@@ -112,50 +111,51 @@ end
 labels2=[[ones(length(TestSet)*1/2,1) zeros(length(TestSet)*1/2,1)]; [zeros(length(TestSet)*1/2,1) ones(length(TestSet)*1/2,1) ]];
 [C2, rate2] = confmat(classification2, labels);
 accuracy2=rate2(1,2)/length(TestSet);
-error_rate2(ee)=1-accuracy2;
-end
-% %% ------------EXERCISE3-------------
-% 
-% % ln[p(a) + p(b)] when ln p(a) = -1000 and ln p(b) = -1001 computation.
-% y = [-1000 -1001];
-% check = logsumexp(y);
-% 
-% %EM algorithm
-% figure();
-% [loglA mogA] = em_mog3(TrainingSetA,num_ellipse,2);
-% figure();
-% [loglB mogB] = em_mog3(TrainingSetB,num_ellipse,2);
-% 
-% 
-% %Posterior Probability
-% sumA=0;
-% sumB=0;
-% for i=1:num_ellipse 
-%     pA = mogA{i}.PI * lmvnpdf(TestSet,mogA{i}.MU,mogA{i}.SIGMA);
-%     sumA = sumA + pA;
-%     pB = mogB{i}.PI * lmvnpdf(TestSet,mogB{i}.MU,mogB{i}.SIGMA);
-%     sumB = sumB + pB;
-% end
-% 
-% %classification3
-% classification3=zeros(size(TestSet));
-% for i=1:size(TestSet,1)
-%    
-%     if sumA(i) > sumB(i)
-%         classification3(i,1)=1;
-%         classification3(i,2)=0;
-%     else
-%         classification3(i,1)=0;
-%         classification3(i,2)=1;
-%     end
-% end
-% 
-% %efficiency evaluation and error rate
-% labels3=[[ones(length(TestSet)*1/2,1) zeros(length(TestSet)*1/2,1)]; [zeros(length(TestSet)*1/2,1) ones(length(TestSet)*1/2,1) ]];
-% [C3, rate3] = confmat(classification3, labels3);
-% accuracy3=rate3(1,2)/length(TestSet);
-% error_rate3=1-accuracy3;
+error_rate2=1-accuracy2;
+toc
 
+%------------EXERCISE3-------------
+
+% ln[p(a) + p(b)] when ln p(a) = -1000 and ln p(b) = -1001 computation.
+y = [-1000 -1001];
+check = logsumexp (y);
+
+tic
+%EM algorithm with log probabilities
+figure();
+[loglA mogA] = em_mog_ex3(TrainingSetA,num_ellipse,2);
+figure();
+[loglB mogB] = em_mog_ex3(TrainingSetB,num_ellipse,2);
+
+%Posterior Probability
+sumA=0;
+sumB=0;
+for i=1:num_ellipse 
+    PA = mogA{i}.PI*mvnpdf(TestSet,mogA{i}.MU,mogA{i}.SIGMA);
+    sumA = sumA + PA;
+    PB = mogB{i}.PI*mvnpdf(TestSet,mogB{i}.MU,mogB{i}.SIGMA);
+    sumB = sumB + PB;
+end
+
+%classification3
+classification3=zeros(size(TestSet));
+for i=1:size(TestSet,1)
+   
+    if sumA(i) > sumB(i)
+        classification3(i,1)=1;
+        classification3(i,2)=0;
+    else
+        classification3(i,1)=0;
+        classification3(i,2)=1;
+    end
+end
+
+%efficiency evaluation and error rate
+labels3=[[ones(length(TestSet)*1/2,1) zeros(length(TestSet)*1/2,1)]; [zeros(length(TestSet)*1/2,1) ones(length(TestSet)*1/2,1) ]];
+[C3, rate3] = confmat(classification3, labels3);
+accuracy3=rate3(1,2)/length(TestSet);
+error_rate3=1-accuracy3;
+toc
 
 
 
