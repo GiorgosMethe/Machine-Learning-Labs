@@ -9,9 +9,9 @@ min_iters     = 20;
 [N,D]         = size(X); 
 
 if verbose
-  fprintf('--> running EM for MoG\n');
-  fprintf('    mixture components: %d\n',C);
-  fprintf('    data: %d points in %d dimensions\n',N,D);
+  %fprintf('--> running EM for MoG\n');
+  %fprintf('    mixture components: %d\n',C);
+  %fprintf('    data: %d points in %d dimensions\n',N,D);
 end
 
 %---Initialisation
@@ -35,10 +35,10 @@ for iter=1:max_iters; % EM loops
     rel_change = (LogL(end)-LogL(end-1)) / abs(mean(LogL(end-1:end)));
 
     if rel_change < 0
-      fprintf('Log likelihood decreased in iteration %d\n',iter)
+      %fprintf('Log likelihood decreased in iteration %d\n',iter)
     end
     if verbose
-      fprintf('iteration %3d   Logl %.2f  relative increment  %.6f\n',iter, LogL(end),rel_change)
+     % fprintf('iteration %3d   Logl %.2f  relative increment  %.6f\n',iter, LogL(end),rel_change)
     end
     if verbose>1
       clf

@@ -16,10 +16,11 @@ function MOG = mog_M_step(X,Q,MOG)
         N_i = sum(Q(:,i));
        
         %updating mean
-        MOG{i}.MU = sum(repmat(Q(:,i),[1 2]) .* X(:,1:2)) / N_i;
+        MOG{i}.MU = sum(repmat(Q(:,i),[1 2]) .* X) / N_i;
 
         %updating covariance if it does not contain singularities
-        temp = (repmat(Q(:,i)', [2 1]) .* ((X(:,1:2) - repmat(MOG{i}.MU, [N 1]))') * (X(:,1:2) - repmat(MOG{i}.MU, [N 1])));
+        Mt1 = repmat(MOG{i}.MU, [N 1]);
+        temp = (repmat(Q(:,i)', [2 1]) .* ((X - Mt1)') * (X - Mt1));
         
         %updating mixture amount
         MOG{i}.PI = N_i / N;

@@ -2,7 +2,7 @@ clc
 clear all
 close all
 
-load('spiral.mat');
+load('banana.mat');
 % load('spiral.mat');
 
 %Determination of the training set. This training set includes 75% of each Table A and B
@@ -10,8 +10,8 @@ TrainingSetA = A(1:length(A)*3/4,:);
 TrainingSetB = B(1:length(B)*3/4,:);
 
 %Determination of the test set. This test set includes 25% of each Table A and B
-TestSet = [A(length(A)*3/4+1:length(A),:) ; B(length(B)*3/4+1:length(B),:)];
-TrainingSet = [TrainingSetA;TrainingSetB];
+TestSet = [ A(length(A)*3/4+1:length(A),:) ; B(length(B)*3/4+1:length(B),:) ];
+TrainingSet = [ TrainingSetA ; TrainingSetB ];
 
 %This figure depicts the two classes of the training set.
 figure();
@@ -75,15 +75,16 @@ labels=[[ones(length(TestSet)*1/2,1) zeros(length(TestSet)*1/2,1)]; [zeros(lengt
 accuracy=rate(1,2)/length(TestSet);
 error_rate=1-accuracy;
 
-tic
+
 %% ------------EXERCISE2-------------
 %EM algorithm
-num_ellipse=3;
-figure();
-[loglA mogA] = em_mog(TrainingSetA,num_ellipse,2);
-figure();
-[loglB mogB] = em_mog(TrainingSetB,num_ellipse,2);
-
+num_ellipse=2;
+tic
+%figure();
+[loglA mogA] = em_mog(TrainingSetA,num_ellipse,1);
+%figure();
+[loglB mogB] = em_mog(TrainingSetB,num_ellipse,1);
+toc
 %Posterior Probability
 sumA=0;
 sumB=0;
@@ -112,7 +113,7 @@ labels2=[[ones(length(TestSet)*1/2,1) zeros(length(TestSet)*1/2,1)]; [zeros(leng
 [C2, rate2] = confmat(classification2, labels);
 accuracy2=rate2(1,2)/length(TestSet);
 error_rate2=1-accuracy2;
-toc
+
 
 %------------EXERCISE3-------------
 
@@ -122,11 +123,11 @@ check = logsumexp (y);
 
 tic
 %EM algorithm with log probabilities
-figure();
-[loglA mogA] = em_mog_ex3(TrainingSetA,num_ellipse,2);
-figure();
-[loglB mogB] = em_mog_ex3(TrainingSetB,num_ellipse,2);
-
+%figure();
+[loglA mogA] = em_mog_ex3(TrainingSetA,num_ellipse,1);
+%figure();
+[loglB mogB] = em_mog_ex3(TrainingSetB,num_ellipse,1);
+toc
 %Posterior Probability
 sumA=0;
 sumB=0;
@@ -155,11 +156,23 @@ labels3=[[ones(length(TestSet)*1/2,1) zeros(length(TestSet)*1/2,1)]; [zeros(leng
 [C3, rate3] = confmat(classification3, labels3);
 accuracy3=rate3(1,2)/length(TestSet);
 error_rate3=1-accuracy3;
-toc
 
 
+BANANATIME = [0.07 0.18 0.42 0.62 0.5 1.97 1.14 2.13 1.48;
+              0.06 0.15 0.36 0.59 0.42 1.92 1.12 2.09 1.37];
+
+SPIRALTIME = [0.08 0.17 0.15 0.28 0.37 0.45 0.53 0.69 0.85;
+     0.07 0.16 0.14 0.29 0.34 0.41 0.53 0.63 0.78];
 
 
-
-
+figure;
+bar(BANANATIME','grouped');
+legend('normal approach','ln probabilities');
+xlabel('Number of Components')
+ylabel('Execution time (sec)')
+figure;
+bar(SPIRALTIME','grouped')
+legend('normal approach','ln probabilities');
+xlabel('Number of Components')
+ylabel('Execution time (sec)')
 
