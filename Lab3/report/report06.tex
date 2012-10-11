@@ -245,6 +245,60 @@ In contrary with the previous ``Banana'' dataset, after performing the same test
 
 
 \section*{Exercise 3}
+First we implemented the logsumexp function that uses an iteration in order to compute the log sum of two or more arguments. It takes as input a list of logarithms and computes the logsumexp of the elements at indices $i$ and $i+1$. Then we advance $i$ by $1$ until the end of the list:
+\begin{verbatim}
+function logsum = logsumexp (X)
+
+    n = size(X,2);
+    
+    for i=1 : (n-1)
+        
+        lnpa = X(:,i);
+        lnpb = X(:,i+1);
+        
+        maxv = max(lnpa,lnpb);
+        minv = min (lnpa,lnpb);
+        
+        X(:,i+1) = (maxv + log(ones(size(lnpa,1),1)+exp(minv-maxv))); 
+    end
+    
+    logsum = X(:, end);
+    
+end
+\end{verbatim} 
+
+After that we checked our implementation by computing $ln[p(a) + p(b)]$ when $ln p(a) = -1000$ and $ln p(b) = -1001$ and the result was $-999.6867$\\
+
+Finally we converted the E-step from the previous exercise:
+\begin{verbatim}
+function [Q LL] = mog_E_step_ex3(X,MOG)
+    %Number of components
+    N = length(X(:,1));
+    K = length(MOG);
+    Q = zeros(N, K);
+    for k = 1:K
+        Q(:,k) = log(MOG{k}.PI) + lmvnpdf(X, MOG{k}.MU, MOG{k}.SIGMA);
+    end
+    Qsum = logsumexp(Q);
+    
+    for k=1:k
+    Q(:,k) = Q(:,k)-Qsum;
+    end
+    Q=exp(Q);
+    LL = sum(Qsum);
+\end{verbatim} 
+
+Although the new implementation is numerically more stable, it is not more accurate than the previous one, as we get the exactly same error rate. The only thing that we observed and we can mention as an improvement is the run-time. In the following array are presented the parameters and the run time of both implementations:
+
+
+\begin{figure}[t!]
+  \centering   
+      \includegraphics[width=0.49\textwidth]{figures/BananaTime.eps}\	
+      \includegraphics[width=0.49\textwidth]{figures/SpiralTime.eps}   
+  \caption{}
+  \label{timeComp}
+\end{figure}
+
 
 
 \newpage

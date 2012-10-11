@@ -158,21 +158,23 @@ accuracy3=rate3(1,2)/length(TestSet);
 error_rate3=1-accuracy3;
 
 
-BANANATIME = [0.07 0.18 0.42 0.62 0.5 1.97 1.14 2.13 1.48;
-              0.06 0.15 0.36 0.59 0.42 1.92 1.12 2.09 1.37];
+BANANATIME = [0 0.07 0.18 0.42 0.62 0.5 1.97 1.14 2.13 1.48;
+              0 0.06 0.15 0.36 0.59 0.42 1.92 1.12 2.09 1.37];
 
-SPIRALTIME = [0.08 0.17 0.15 0.28 0.37 0.45 0.53 0.69 0.85;
-     0.07 0.16 0.14 0.29 0.34 0.41 0.53 0.63 0.78];
+SPIRALTIME = [0 0.08 0.17 0.15 0.28 0.37 0.45 0.53 0.69 0.85;
+    0 0.07 0.16 0.14 0.29 0.34 0.41 0.53 0.63 0.78];
 
 
 figure;
 bar(BANANATIME','grouped');
-legend('normal approach','ln probabilities');
+axis([1.5 10.5 0 2.5])
+legend('Normal approach','Ln-probabilities');
 xlabel('Number of Components')
-ylabel('Execution time (sec)')
+ylabel('Execution Time (Sec)')
 figure;
 bar(SPIRALTIME','grouped')
-legend('normal approach','ln probabilities');
+axis([1.5 10.5 0 1])
+legend('Normal approach','Ln-probabilities');
 xlabel('Number of Components')
-ylabel('Execution time (sec)')
+ylabel('Execution Time (Sec)')
 
